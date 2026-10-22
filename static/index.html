@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Resume Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main>
+  <h1>AI Resume Analyzer</h1>
+  <p class="sub">Upload a resume, paste a job description, and see how well they match.</p>
+
+  <div class="card">
+    <div class="field">
+      <label for="resume">Resume (PDF or DOCX)</label>
+      <input type="file" id="resume" accept=".pdf,.docx">
+    </div>
+    <div class="field">
+      <label for="jd">Job description</label>
+      <textarea id="jd" placeholder="Paste the full job description here..."></textarea>
+    </div>
+    <label class="check"><input type="checkbox" id="sugg" checked> Include AI suggestions</label>
+    <button id="go">Analyze</button>
+    <div id="error"></div>
+  </div>
+
+  <div id="results">
+    <div class="card top">
+      <div class="gauge">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="54" fill="none" stroke="var(--border)" stroke-width="12"/>
+          <circle id="arc" cx="70" cy="70" r="54" fill="none" stroke="var(--accent)"
+                  stroke-width="12" stroke-linecap="round"
+                  stroke-dasharray="339.29" stroke-dashoffset="339.29"/>
+        </svg>
+        <div class="num"><span id="pct">0%</span><small>match</small></div>
+      </div>
+      <div class="bars">
+        <div class="bar-row">Skill match <span id="skillTxt"></span>
+          <div class="bar"><div id="skillBar"></div></div></div>
+        <div class="bar-row">Semantic similarity <span id="semTxt"></span>
+          <div class="bar"><div id="semBar"></div></div></div>
+        <div class="legend" id="sections"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Skills</h2>
+      <p class="legend">Matched</p><div class="chips" id="matched"></div>
+      <p class="legend">Missing (required)</p><div class="chips" id="missReq"></div>
+      <p class="legend">Missing (nice to have)</p><div class="chips" id="missPref"></div>
+    </div>
+
+    <div class="card" id="suggCard">
+      <h2>Suggestions <span class="badge" id="source"></span></h2>
+      <p id="summary"></p>
+      <div id="rewrites"></div>
+      <h2 id="gapH">Closing the skill gaps</h2>
+      <ul id="gaps"></ul>
+      <h2 id="qH" class="spaced">Likely interview questions</h2>
+      <ul id="questions"></ul>
+    </div>
+  </div>
+</main>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
